@@ -1,0 +1,18 @@
+[project]
+name = "py_telegram_shop_bot"
+version = "0.1.0"
+description = "Простой телеграм бот на Python 3 с реализацией функционала интернет-магазина цифровых товаров и возможностью оплаты через различные платёжные сервисы."
+authors = [
+    {name = "Олег Широ"}
+]
+license = "MIT License"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "aiogram",
+    "loguru"
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
