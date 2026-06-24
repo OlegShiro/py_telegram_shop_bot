@@ -7,4 +7,26 @@ ID: Project_00106261d
 цифровых товаров и возможностью оплаты через различные платёжные сервисы.
 """
 
-print("Python Telegram Shop Bot by Oleg Shiro.")
+import asyncio
+
+from aiogram import Bot, Dispatcher
+from loguru import logger
+
+import config
+import handlers
+
+
+async def main():
+    # Инициализация Бота
+    bot = Bot(token=config.BOT_TOKEN)
+    dispatcher = Dispatcher()
+
+    # Регистрация обработчика ECHO
+    dispatcher.message.register(handlers.echo)
+
+    await dispatcher.start_polling(bot, skip_updates=True)
+
+
+if __name__ == "__main__":
+    logger.debug("Начало работы.")
+    asyncio.run(main())
