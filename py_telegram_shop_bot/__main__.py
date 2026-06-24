@@ -9,24 +9,13 @@ ID: Project_00106261d
 
 import asyncio
 
-from aiogram import Bot, Dispatcher
-from loguru import logger
-
-import config
-import handlers
+from setup import setup
 
 
 async def main():
-    # Инициализация Бота
-    bot = Bot(token=config.BOT_TOKEN)
-    dispatcher = Dispatcher()
-
-    # Регистрация обработчика ECHO
-    dispatcher.message.register(handlers.echo)
-
+    bot, dispatcher = setup()
     await dispatcher.start_polling(bot, skip_updates=True)
 
 
 if __name__ == "__main__":
-    logger.debug("Начало работы.")
     asyncio.run(main())
