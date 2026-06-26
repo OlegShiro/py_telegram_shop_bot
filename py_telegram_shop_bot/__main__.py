@@ -2,9 +2,22 @@
 """
 Python Telegram Shop Bot
 ID: Project_00106261d
+Разработчик: Олег Широ (https://github.com/OlegShiro)
+Лицензия: MIT License
 
 Простой телеграм бот на Python 3 с реализацией функционала интернет-магазина
 цифровых товаров и возможностью оплаты через различные платёжные сервисы.
 """
 
-print("Python Telegram Shop Bot by Oleg Shiro.")
+import asyncio
+
+from setup import setup
+
+
+async def main() -> None:
+    bot, dispatcher = setup()
+    await dispatcher.start_polling(bot, skip_updates=True)
+
+
+if __name__ == "__main__":
+    asyncio.run(main=main())
