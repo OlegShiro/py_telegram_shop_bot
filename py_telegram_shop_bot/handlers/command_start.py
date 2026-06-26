@@ -1,5 +1,6 @@
 from loguru import logger
 
+import text
 from database import get_session
 from database.models import User
 
@@ -11,6 +12,4 @@ async def command_start(message):
         session.add(User(uid=uid))
         session.commit()
         logger.info(f"Зарегистрирован новый пользователь: {uid}")
-        await message.answer("Регистрация успешна.")
-    await message.answer("Привет, это Бот для продажи цифровых товаров в " \
-        "Телеграм. В данный момент я нахожусь в разработке.")
+    await message.answer(text.COMMAND_START)
