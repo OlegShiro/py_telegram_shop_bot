@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+"""Настройка логирования бота."""
+
 import sys
 
 from loguru import logger
@@ -5,11 +8,17 @@ from loguru import logger
 import config
 
 
-def setup_logger():
+def setup_logger() -> None:
+    """Настраивает логирование бота согласно файла конфигурации."""
     logger.remove()
-    logger.add(sys.stdout, level=config.LOG_LEVEL_OUTPUT,
+
+    # Вывод в терминал
+    logger.add(sink=sys.stdout, level=config.LOG_LEVEL_OUTPUT,
                format=config.LOG_FORMAT)
+
+    # Запись в файл, если в файле конфигурации указан путь
     if config.LOG_PATH:
-        logger.add(config.LOG_PATH, level=config.LOG_LEVEL_FILE,
+        logger.add(sink=config.LOG_PATH, level=config.LOG_LEVEL_FILE,
                    format=config.LOG_FORMAT)
-    logger.debug("Логирование настроено.")
+
+    logger.debug("Логирование настроено.")  # Логирование

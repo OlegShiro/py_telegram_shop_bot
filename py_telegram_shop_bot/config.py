@@ -1,6 +1,14 @@
-BOT_TOKEN = ""
+# -*- coding: utf-8 -*-
+"""
+Файл конфигурации бота.
 
-LOG_FORMAT = "<green>{time: HH:mm:ss}</green> | {level: <8} | {message}"
-LOG_PATH = ""
-LOG_LEVEL_FILE = "INFO"
-LOG_LEVEL_OUTPUT = "DEBUG"
+Указаны значения по умолчанию. Перезаписываются при запуске
+бота данными из файла 'config.ini'.
+"""
+
+BOT_TOKEN: str = ""
+
+LOG_FORMAT: str = "<green>{time: HH:mm:ss}</green> | {level: <8} | {message}"
+LOG_PATH: str = ""
+LOG_LEVEL_FILE: str = "INFO"
+LOG_LEVEL_OUTPUT: str = "DEBUG"

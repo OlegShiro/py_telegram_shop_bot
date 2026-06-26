@@ -1,21 +1,41 @@
+# -*- coding: utf-8 -*-
+"""Функции для создания и получения сессии базы данных SQLAlchemy."""
+
+from typing import Final
+
 from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy.engine import Engine
+from sqlalchemy.orm import declarative_base, Session, sessionmaker
 
 
-base = declarative_base()
-__session = None
+__session: Session | None = None
+base: Final = declarative_base()
 
 
-def create_session(database_path):
-    global __session, base
+def create_session(database_path: str) -> str:
+    """Создаёт сессию базы данных SQLAlchemy.
 
-    con_str = f"sqlite:///{database_path}?check_same_thread=False"
-    engine = create_engine(con_str, echo=False)
-    __session = sessionmaker(engine)
+    Args:
+        database_path (str): Путь к файлу базы данных.
+
+    Returns:
+        str: Адрес (URL) подключения к базе данных.
+    """
+    global __session
+
+    url: str = f"sqlite:///{database_path}?check_same_thread=False"
+    engine: Engine = create_engine(url=url, echo=False)
+    __session = sessionmaker(bind=engine)
     base.metadata.create_all(engine)
 
-    return con_str
+    return url
 
 
-def get_session():
+def get_session() -> Session | None:
+    """Возвращает сессию базы данных SQLAlchemy если она была инициализирована.
+
+    Returns:
+        sqlalchemy.orm.Session: Сессия базы данных.
+        None: Если сессия не была инициализирована
+    """
     return None if __session is None else __session()
