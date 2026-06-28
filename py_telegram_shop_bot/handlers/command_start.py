@@ -6,15 +6,22 @@
 и выводит приветственное сообщение.
 """
 
+from aiogram import Dispatcher
+from aiogram.filters import Command
 from aiogram.types import Message
 from loguru import logger
 from sqlalchemy.orm import Session
 
 import text
+from bot import get_dispatcher
 from database import get_session
 from database.models import User
 
 
+__dispatcher: Dispatcher = get_dispatcher()
+
+
+@__dispatcher.message(Command("start"))
 async def command_start(message: Message) -> None:
     """Обработчик команды '/start'.
 

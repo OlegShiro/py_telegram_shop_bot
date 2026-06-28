@@ -8,7 +8,6 @@ from database import create_session
 from .setup_config import setup_config
 from .setup_logger import setup_logger
 from .setup_bot import setup_bot
-from .setup_handlers import setup_handlers
 
 
 def setup() -> None:
@@ -20,8 +19,12 @@ def setup() -> None:
     bot, dispatcher = setup_bot()
     set_bot(bot=bot)
     set_dispatcher(dispatcher=dispatcher)
-    
-    setup_handlers(dispatcher=dispatcher)
+
+    # Импорт необходим после инициалиации диспетчера, чтобы сработал
+    # скрипт "handlers.__init__.py", который выполнит каждый скрипт
+    # с обработчиками бота , регистрируя их в диспетчере
+    import handlers  # noqa: F401
+    logger.debug("Обработчики зарегистрированы.")  # Логирование
 
     logger.debug("Настройки бота применены успешно.")  # Логирование
     logger.info("Запуск бота.")  # Логирование
