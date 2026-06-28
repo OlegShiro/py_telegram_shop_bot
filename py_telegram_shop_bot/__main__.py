@@ -11,12 +11,14 @@ ID: Project_00106261d
 
 import asyncio
 
+from bot import get_bot, get_dispatcher
 from setup import setup
 
 
 async def main() -> None:
-    bot, dispatcher = setup()
-    await dispatcher.start_polling(bot, skip_updates=True)
+    """Запуск бота."""
+    setup()
+    await get_dispatcher().start_polling(get_bot(), skip_updates=True)
 
 
 if __name__ == "__main__":
